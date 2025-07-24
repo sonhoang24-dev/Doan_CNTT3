@@ -8,7 +8,6 @@ Dashmix.onLoad(() =>
           rules: {
             mamonhoc: {
               required: !0,
-              digits: true,
             },
             tenmonhoc: {
               required: !0,
@@ -26,7 +25,6 @@ Dashmix.onLoad(() =>
           messages: {
             mamonhoc: {
               required: "Vui lòng nhập mã môn học",
-              digits: "Mã môn học phải là các ký tự số",
             },
             tenmonhoc: {
               required: "Vui lòng cung cấp tên môn học",

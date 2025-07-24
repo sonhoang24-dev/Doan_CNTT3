@@ -4,7 +4,34 @@ Dashmix.onLoad(() =>
   class {
     static initValidation() {
       Dashmix.helpers("jq-validation"),
-        jQuery("#addSvThuCong").validate().destroy();
+        jQuery("#addSvThuCong").validate({
+          rules: {
+            mssv: {
+              required: !0,
+              minlength: 10,
+            },
+            hoten: {
+              required: !0,
+            },
+            matkhau: {
+              required: !0,
+              minlength: 6,
+            },
+          },
+          messages: {
+            mssv: {
+              required: "Vui lòng nhập mã sinh viên của bạn",
+              minlength: "Mã số sinh viên ít nhất 10 ký tự",
+            },
+            hoten: {
+              required: "Cung cấp đầy đủ họ tên",
+            },
+            matkhau: {
+              required: "Nhập mật khẩu",
+              minlength: "Mật khẩu phải có ít nhất 6 ký tự!",
+            },
+          },
+        });
     }
 
     static init() {

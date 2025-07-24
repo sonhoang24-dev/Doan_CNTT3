@@ -28,10 +28,10 @@ $GLOBALS['navbar'] = [
         'type'  => 'heading',
         'navbarItem' => [
             array(
-                'name'  => 'Nhóm học phần',
-                'icon'  => 'fa fa-layer-group',
-                'url'   => 'module',
-                'role' => 'hocphan'
+                'name'  => 'Môn học',
+                'icon'  => 'fa fa-folder',
+                'url'   => 'subject',
+                'role' => 'monhoc'
             ),
             array(
                 'name'  => 'Câu hỏi',
@@ -40,11 +40,12 @@ $GLOBALS['navbar'] = [
                 'role' => 'cauhoi'
             ),
             array(
-                'name'  => 'Môn học',
-                'icon'  => 'fa fa-folder',
-                'url'   => 'subject',
-                'role' => 'monhoc'
+                'name'  => 'Nhóm học phần',
+                'icon'  => 'fa fa-layer-group',
+                'url'   => 'module',
+                'role' => 'hocphan'
             ),
+         
             array(
                 'name'  => 'Đề kiểm tra',
                 'icon'  => 'fa fa-file',
