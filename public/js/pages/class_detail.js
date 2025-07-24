@@ -4,32 +4,7 @@ Dashmix.onLoad(() =>
   class {
     static initValidation() {
       Dashmix.helpers("jq-validation"),
-        jQuery("#addSvThuCong").validate({
-          rules: {
-            mssv: {
-              required: !0,
-            },
-            hoten: {
-              required: !0,
-            },
-            matkhau: {
-              required: !0,
-              minlength: 6,
-            },
-          },
-          messages: {
-            mssv: {
-              required: "Vui lòng nhập mã sinh viên của bạn",
-            },
-            hoten: {
-              required: "Cung cấp đầy đủ họ tên",
-            },
-            matkhau: {
-              required: "Nhập mật khẩu",
-              minlength: "Mật khẩu phải có ít nhất 6 ký tự!",
-            },
-          },
-        });
+        jQuery("#addSvThuCong").validate().destroy();
     }
 
     static init() {

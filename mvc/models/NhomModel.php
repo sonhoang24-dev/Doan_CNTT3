@@ -137,34 +137,22 @@ class NhomModel extends DB
     }
 
     // Thêm sinh viên vào nhóm
-public function join($manhom, $manguoidung)
-{
-    $valid = true;
-    $checkSql = "SELECT * FROM `chitietnhom` WHERE `manhom` = ? AND `manguoidung` = ?";
-    $stmt = $this->con->prepare($checkSql);
-    $stmt->bind_param("ss", $manhom, $manguoidung);
-    $stmt->execute();
-    $checkResult = $stmt->get_result();
+    public function join($manhom, $manguoidung)
+    {
+        $valid = true;
+        $checkSql = "SELECT * FROM `chitietnhom` WHERE `manhom` = '$manhom' AND `manguoidung` = '$manguoidung'";
+        $checkResult = mysqli_query($this->con, $checkSql);
 
-    if (mysqli_num_rows($checkResult) == 0) {
-        $insertSql = "INSERT INTO `chitietnhom`(`manhom`, `manguoidung`, `hienthi`) VALUES (?, ?, 1)";
-        $stmt = $this->con->prepare($insertSql);
-        $stmt->bind_param("ss", $manhom, $manguoidung);
-        if (!$stmt->execute()) {
-            error_log("Failed to insert into chitietnhom: " . $stmt->error);
+        if (mysqli_num_rows($checkResult) == 0) {
+            $insertSql = "INSERT INTO `chitietnhom`(`manhom`, `manguoidung`) VALUES ('$manhom','$manguoidung')";
+            $insertResult = mysqli_query($this->con, $insertSql);
+
+            if (!$insertResult) $valid = false;
+        } else {
             $valid = false;
         }
-    } else {
-        $updateSql = "UPDATE `chitietnhom` SET `hienthi` = 1 WHERE `manhom` = ? AND `manguoidung` = ?";
-        $stmt = $this->con->prepare($updateSql);
-        $stmt->bind_param("ss", $manhom, $manguoidung);
-        if (!$stmt->execute()) {
-            error_log("Failed to update chitietnhom: " . $stmt->error);
-            $valid = false;
-        }
+        return $valid;
     }
-    return $valid;
-}
 
 
     // Thoát khỏi nhóm 
@@ -179,24 +167,20 @@ public function join($manhom, $manguoidung)
     }
 
     // Lấy các nhóm mà sinh viên tham gia
-public function getAllGroup_User($user_id, $hienthi)
-{
-    error_log("getAllGroup_User called with user_id=$user_id, hienthi=$hienthi");
-    $sql = "SELECT monhoc.mamonhoc,monhoc.tenmonhoc,nhom.manhom, nhom.tennhom, namhoc, hocky ,nguoidung.hoten, nguoidung.avatar,chitietnhom.hienthi
-    FROM chitietnhom, nhom, nguoidung, monhoc
-    WHERE chitietnhom.manhom = nhom.manhom AND nguoidung.id = nhom.giangvien AND monhoc.mamonhoc = nhom.mamonhoc AND chitietnhom.manguoidung = $user_id
-    AND chitietnhom.hienthi = $hienthi AND nhom.trangthai != 0";
-    $result = mysqli_query($this->con, $sql);
-    if (!$result) {
-        error_log("SQL Error: " . mysqli_error($this->con));
+    public function getAllGroup_User($user_id, $hienthi)
+    {
+        $sql = "SELECT monhoc.mamonhoc,monhoc.tenmonhoc,nhom.manhom, nhom.tennhom, namhoc, hocky ,nguoidung.hoten, nguoidung.avatar,chitietnhom.hienthi
+        FROM chitietnhom, nhom, nguoidung, monhoc
+        WHERE chitietnhom.manhom = nhom.manhom AND nguoidung.id = nhom.giangvien AND monhoc.mamonhoc = nhom.mamonhoc AND chitietnhom.manguoidung = $user_id
+        AND chitietnhom.hienthi = $hienthi AND nhom.trangthai != 0";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return $rows;
     }
-    $rows = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
-    error_log("Result: " . json_encode($rows));
-    return $rows;
-}
+
     // Lấy chi tiết một nhóm mà sinh viên tham gia
     public function getDetailGroup($manhom)
     {
@@ -261,37 +245,18 @@ public function getAllGroup_User($user_id, $hienthi)
         return $valid;
     }
 
-   public function addSV($mssv, $hoten, $password)
-{
-    // Kiểm tra xem tài khoản đã tồn tại
-    $checkSql = "SELECT * FROM `nguoidung` WHERE `id` = ?";
-    $stmt = $this->con->prepare($checkSql);
-    $stmt->bind_param("s", $mssv);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if (mysqli_num_rows($result) == 0) {
-        // Nếu tài khoản chưa tồn tại, tạo mới (trường hợp dự phòng)
+    public function addSV($mssv, $hoten, $password)
+    {
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO `nguoidung`(`id`,`hoten`,`matkhau`,`trangthai`, `manhomquyen`) VALUES (?, ?, ?, '1', '11')";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("sss", $mssv, $hoten, $password);
-        if (!$stmt->execute()) {
-            error_log("Failed to insert user: " . $stmt->error);
-            return false;
+        $sql = "INSERT INTO `nguoidung`(`id`,`hoten`,`matkhau`,`trangthai`, `manhomquyen`) VALUES ('$mssv','$hoten','$password','1', '11')";
+        $check = true;
+        $result = mysqli_query($this->con, $sql);
+        if (!$result) {
+            $check = false;
         }
+        return $check;
     }
-    return true;
-}
 
-public function checkUserExists($mssv)
-{
-    $sql = "SELECT * FROM `nguoidung` WHERE `id` = ?";
-    $stmt = $this->con->prepare($sql);
-    $stmt->bind_param("s", $mssv);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return mysqli_num_rows($result) > 0;
-}
     public function checkAcc($mssv, $manhom)
     {
         $sql_checkGroup = "SELECT * FROM chitietnhom where manhom='$manhom' AND manguoidung='$mssv'";

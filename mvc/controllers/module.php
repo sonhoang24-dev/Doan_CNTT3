@@ -155,33 +155,19 @@ class Module extends Controller
     }
 
 
-   public function addSV()
-{
-    AuthCore::checkAuthentication();
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $manhom = $_POST['manhom'];
-        $mssv = $_POST['mssv'];
-        $hoten = $_POST['hoten'];
-        $password = $_POST['password'];
-        
-        // Kiểm tra tài khoản tồn tại
-        $checkUser = $this->nhomModel->checkUserExists($mssv); // Thêm hàm này nếu cần
-        if (!$checkUser) {
-            $result = $this->nhomModel->addSV($mssv, $hoten, $password);
-            if (!$result) {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to create or verify user']);
-                return;
-            }
+    public function addSV()
+    {
+        AuthCore::checkAuthentication();
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $manhom = $_POST['manhom'];
+            $mssv = $_POST['mssv'];
+            $hoten = $_POST['hoten'];
+            $password = $_POST['password'];
+            $result = $this->nhomModel->addSV($mssv,$hoten,$password);
+            $joinGroup = $this->nhomModel->join($manhom,$mssv);
+            echo $joinGroup;
         }
-        
-        $joinGroup = $this->nhomModel->join($manhom, $mssv);
-        if (!$joinGroup) {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to join group']);
-            return;
-        }
-        echo json_encode(['status' => 'success', 'message' => 'User added to group']);
     }
-}
 
     public function addSvGroup(){
         AuthCore::checkAuthentication();
