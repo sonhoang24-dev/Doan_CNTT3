@@ -98,7 +98,7 @@
         <h1>OnTest<span>DHT</span></h1>
         <p>Quên mật khẩu? Nhập email để khôi phục</p>
 
-        <form method="POST">
+        <form method="POST" action ="/Quanlythitracnghiem/auth/sendOptAuth" id="recoverForm">
             <input type="email" name="reminder-credential" placeholder="Nhập email của bạn" required>
             <button type="submit" class="btn-primary">Khôi phục mật khẩu</button>
         </form>
