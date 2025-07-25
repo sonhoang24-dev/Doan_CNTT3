@@ -96,26 +96,38 @@ $("#btnRecover").click(function (e) {
 
 $("#opt").click(function (e) {
   e.preventDefault();
+
   if ($("#formOpt").valid()) {
     let opt = $("#txtOpt").val();
+
     $.ajax({
       type: "post",
       url: "./auth/checkOpt",
       data: {
-        opt: opt,
+        otp: opt,
       },
+      dataType: "json", // Quan trọng: ép kiểu dữ liệu trả về là JSON
       success: function (response) {
-        let data = response;
-        console.log(response);
-        if (data == 0) {
+        console.log("Response:", response);
+
+        if (response === false || response == 0) {
           Dashmix.helpers("jq-notify", {
             type: "danger",
             icon: "fa fa-times me-1",
-            message: `Mã OPT không đúng`,
+            message: `Mã OTP không đúng`,
           });
         } else {
-          location.href = `./auth/changepass`;
+          // Trường hợp đúng, chuyển hướng sang giao diện đổi mật khẩu
+          window.location.href = "./auth/changepass";
         }
+      },
+      error: function (xhr, status, error) {
+        console.error("Lỗi AJAX:", error);
+        Dashmix.helpers("jq-notify", {
+          type: "danger",
+          icon: "fa fa-exclamation-circle me-1",
+          message: `Lỗi hệ thống, vui lòng thử lại.`,
+        });
       },
     });
   }
@@ -126,22 +138,36 @@ $("#btnChange").click(function (e) {
   if ($("#changepass").valid()) {
     let passwordNew = $("#passwordNew").val();
     $.ajax({
-      type: "post",
+      type: "POST",
       url: "./auth/changePassword",
       data: {
         password: passwordNew,
       },
       success: function (response) {
-        if (response == 1) {
+        const data = JSON.parse(response);
+        if (data.status === "success") {
           Dashmix.helpers("jq-notify", {
             type: "success",
-            icon: "fa fa-times me-1",
-            message: `Thay đổi mật khẩu thành công!`,
+            icon: "fa fa-check me-1",
+            message: data.message,
           });
-          setTimeout(function () {
-            location.href = `./auth/signin`;
-          }, 3000);
+          setTimeout(() => {
+            location.href = "./auth/signin";
+          }, 2000);
+        } else {
+          Dashmix.helpers("jq-notify", {
+            type: "danger",
+            icon: "fa fa-times me-1",
+            message: data.message,
+          });
         }
+      },
+      error: function () {
+        Dashmix.helpers("jq-notify", {
+          type: "danger",
+          icon: "fa fa-times me-1",
+          message: "Đã xảy ra lỗi kết nối đến máy chủ",
+        });
       },
     });
   }

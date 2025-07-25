@@ -62,8 +62,8 @@ body {
     <div class="col-md-6 d-flex align-items-center justify-content-center bg-white">
       <div class="p-5 w-100 shadow-elevated rounded-5" style="max-width: 450px;">
         <div class="text-center mb-4">
-          <a class="fs-1 fw-bold text-decoration-none" href="/">
-            <span class="text-gradient">ONTEST DHT</span>
+          <a class="fs-1 fw-bold text-decoration-none">
+            <span class="text-gradient">DHT ONTEST</span>
           </a>
           <p class="text-muted fw-semibold text-uppercase mt-2">Đăng nhập</p>
           <div id="loginError" class="alert"></div>
@@ -108,10 +108,10 @@ body {
       </div>
       <div class="position-relative p-5" style="max-width: 500px;">
         <h1 class="fw-bold mb-3" style="font-size: 2.5rem;">
-          <span class="text-gradient">ONTEST DHT</span>
+          <span class="text-gradient">DHT ONTEST</span>
         </h1>
         <p class="fs-5 text-dark fw-normal mb-4">Hệ thống tạo và quản lý bài thi cá nhân hóa</p>
-        <p class="small text-muted">© <span id="year-copy"></span> ONTEST DHT</p>
+        <p class="small text-muted">© <span id="year-copy"></span> DHT ONTEST</p>
       </div>
     </div>
   </div>

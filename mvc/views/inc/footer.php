@@ -4,10 +4,10 @@
         <div class="row fs-sm">
             <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
                 Crafted with <i class="fa fa-heart text-danger"></i> by <a class="fw-semibold"
-                    href="./" target="_blank"> ONTEST DHT</a>
+                    href="./" target="_blank"> DHT ONTEST</a>
             </div>
             <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
-                <a class="fw-semibold" href="./" target="_blank"> ONTEST DHT</a> &copy;
+                <a class="fw-semibold" href="./" target="_blank"> DHT ONTEST</a> &copy;
                 <span data-toggle="year-copy"></span>
             </div>
         </div>
@@ -17,7 +17,7 @@
 <!-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
   intent="WELCOME"
-  chat-title=" ONTEST DHTBot"
+  chat-title=" ONTEST DHT"
   agent-id="70ce2c3a-8f60-43f2-ab60-a0be4f03d47d"
   language-code="vi"
 ></df-messenger> -->

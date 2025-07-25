@@ -198,31 +198,40 @@ class Auth extends Controller
         }
     }
 
-    public function checkOpt()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $otp = $_POST['otp'] ?? '';
-            $email = $_SESSION['checkMail'] ?? '';
-            $check = $this->userModel->checkOpt($email, $otp);
-            echo json_encode($check);
-        }
+public function checkOpt()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $otp = $_POST['otp'] ?? '';
+        $email = $_SESSION['checkMail'] ?? '';
+        $check = $this->userModel->checkOtp($email, $otp); 
+        echo json_encode($check); 
     }
+}
 
-    public function changePassword()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $password = $_POST['password'] ?? '';
-            $email = $_SESSION['checkMail'] ?? '';
-            $check = $this->userModel->changePassword($email, password_hash($password, PASSWORD_DEFAULT));
-            $resetOTP = $this->userModel->updateOpt($email, null);
-            if ($check) {
-                session_destroy();
-                echo json_encode(['status' => 'success', 'message' => 'Đổi mật khẩu thành công']);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Đổi mật khẩu thất bại']);
-            }
+public function changePassword()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $password = $_POST['password'] ?? '';
+        $email = $_SESSION['checkMail'] ?? '';
+
+        if (empty($email)) {
+            echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy người dùng']);
+            return;
+        }
+
+        $newPasswordHash = password_hash($password, PASSWORD_DEFAULT);
+        $check = $this->userModel->changePassword($email, $newPasswordHash);
+        $resetOTP = $this->userModel->updateOpt($email, null);
+
+        if ($check) {
+            session_destroy();
+            echo json_encode(['status' => 'success', 'message' => 'Đổi mật khẩu thành công']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Đổi mật khẩu thất bại']);
         }
     }
+}
+
 
     public function sendOptAuth()
     {

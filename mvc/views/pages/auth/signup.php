@@ -10,7 +10,7 @@ $error = $_SESSION['error'] ?? null;
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OnTest DHT - Tạo tài khoản</title>
+<title>DHT OnTest - Tạo tài khoản</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
     * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -47,7 +47,7 @@ $error = $_SESSION['error'] ?? null;
 
 <div class="bg-image">
     <div class="form-card">
-        <h1>OnTest<span>DHT</span></h1>
+        <h1>DHT<span>OnTest</span></h1>
         <p>Tạo tài khoản mới</p>
 
         <?php if ($error): ?>
@@ -100,17 +100,17 @@ $error = $_SESSION['error'] ?? null;
                 <h2>Điều khoản và Chính sách</h2>
                 <div class="modal-body">
                     <p><strong>1. Chấp nhận Điều khoản</strong><br>
-                        Bằng việc sử dụng dịch vụ của OnTest DHT, bạn đồng ý tuân thủ các điều khoản và điều kiện được nêu trong tài liệu này. Nếu bạn không đồng ý, vui lòng không sử dụng dịch vụ.</p>
+                        Bằng việc sử dụng dịch vụ của DHT OnTest, bạn đồng ý tuân thủ các điều khoản và điều kiện được nêu trong tài liệu này. Nếu bạn không đồng ý, vui lòng không sử dụng dịch vụ.</p>
                     <p><strong>2. Quyền và Nghĩa vụ</strong><br>
                         - Bạn cam kết cung cấp thông tin chính xác và đầy đủ khi đăng ký tài khoản.<br>
                         - Bạn chịu trách nhiệm bảo mật thông tin tài khoản và mật khẩu của mình.<br>
-                        - OnTest DHT có quyền tạm ngưng hoặc hủy tài khoản nếu phát hiện hành vi vi phạm điều khoản.</p>
+                        - DHT OnTest có quyền tạm ngưng hoặc hủy tài khoản nếu phát hiện hành vi vi phạm điều khoản.</p>
                     <p><strong>3. Quyền riêng tư</strong><br>
                         Thông tin cá nhân của bạn sẽ được bảo vệ theo Chính sách Bảo mật của chúng tôi. Chúng tôi chỉ thu thập và sử dụng thông tin theo mục đích cung cấp dịch vụ và tuân thủ pháp luật.</p>
                     <p><strong>4. Giới hạn trách nhiệm</strong><br>
-                        OnTest DHT không chịu trách nhiệm cho bất kỳ thiệt hại nào phát sinh từ việc sử dụng dịch vụ, bao gồm nhưng không giới hạn ở mất dữ liệu hoặc gián đoạn dịch vụ.</p>
+                        DHT OnTest không chịu trách nhiệm cho bất kỳ thiệt hại nào phát sinh từ việc sử dụng dịch vụ, bao gồm nhưng không giới hạn ở mất dữ liệu hoặc gián đoạn dịch vụ.</p>
                     <p><strong>5. Thay đổi Điều khoản</strong><br>
-                        OnTest DHT có quyền cập nhật hoặc thay đổi điều khoản này bất kỳ lúc nào. Các thay đổi sẽ được thông báo qua email hoặc trên nền tảng.</p>
+                        DHT OnTest có quyền cập nhật hoặc thay đổi điều khoản này bất kỳ lúc nào. Các thay đổi sẽ được thông báo qua email hoặc trên nền tảng.</p>
                 </div>
                 <div class="modal-footer">
                     <button class="close-btn" onclick="document.getElementById('termsModal').style.display='none'">Đóng</button>

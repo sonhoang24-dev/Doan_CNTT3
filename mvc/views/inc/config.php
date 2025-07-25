@@ -1,65 +1,64 @@
 <?php
 $GLOBALS['navbar'] = [
-    array(
-        'name'  => 'Dashboard',
-        'icon'  => 'fa fa-rocket',
-        'url'   => 'dashboard'
-    ),
-    array(
-        'name'  => 'Sinh viên',
-        'type'  => 'heading',
+    [
+        'name' => 'Dashboard',
+        'icon' => 'fas fa-tachometer-alt', // icon dashboard
+        'url'  => 'dashboard'
+    ],
+    [
+        'name' => 'Sinh viên',
+        'type' => 'heading',
         'navbarItem' => [
-            array(
-                'name'  => 'Học phần',
-                'icon'  => 'fa fa-users-line',
-                'url'   => 'client/group',
+            [
+                'name' => 'Học phần',
+                'icon' => 'fas fa-chalkboard-teacher', // rõ nghĩa học phần
+                'url'  => 'client/group',
                 'role' => 'tghocphan'
-            ),
-            array(
-                'name'  => 'Đề thi',
-                'icon'  => 'fa fa-graduation-cap',
-                'url'   => 'client/test',
+            ],
+            [
+                'name' => 'Đề thi',
+                'icon' => 'fas fa-file-alt', // đề thi rõ hơn
+                'url'  => 'client/test',
                 'role' => 'tgthi'
-            ),
+            ],
         ]
-            ),
-    array(
-        'name'  => 'Giáo Viên',
-        'type'  => 'heading',
+    ],
+    [
+        'name' => 'Giáo viên',
+        'type' => 'heading',
         'navbarItem' => [
-            array(
-                'name'  => 'Môn học',
-                'icon'  => 'fa fa-folder',
-                'url'   => 'subject',
+            [
+                'name' => 'Môn học',
+                'icon' => 'fas fa-book-open', // môn học
+                'url'  => 'subject',
                 'role' => 'monhoc'
-            ),
-            array(
-                'name'  => 'Câu hỏi',
-                'icon'  => 'fa fa-circle-question',
-                'url'   => 'question',
+            ],
+            [
+                'name' => 'Câu hỏi',
+                'icon' => 'fas fa-question-circle', // câu hỏi
+                'url'  => 'question',
                 'role' => 'cauhoi'
-            ),
-            array(
-                'name'  => 'Nhóm học phần',
-                'icon'  => 'fa fa-layer-group',
-                'url'   => 'module',
+            ],
+            [
+                'name' => 'Nhóm học phần',
+                'icon' => 'fas fa-layer-group', // nhóm học phần
+                'url'  => 'module',
                 'role' => 'hocphan'
-            ),
-         
-            array(
-                'name'  => 'Đề kiểm tra',
-                'icon'  => 'fa fa-file',
-                'url'   => 'test',
+            ],
+            [
+                'name' => 'Đề kiểm tra',
+                'icon' => 'fas fa-file-lines', // bài kiểm tra
+                'url'  => 'test',
                 'role' => 'dethi'
-            ),
-            array(
-                'name'  => 'Thông báo',
-                'icon'  => 'fa fa-comment',
-                'url'   => 'teacher_announcement',
+            ],
+            [
+                'name' => 'Thông báo',
+                'icon' => 'fas fa-bullhorn', // icon thông báo sinh động hơn
+                'url'  => 'teacher_announcement',
                 'role' => 'thongbao'
-            ),
+            ],
         ]
-    ),
+    ]
 ];
 
 // Xử lý url để active navbar

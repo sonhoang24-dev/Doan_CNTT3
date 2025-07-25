@@ -1,6 +1,6 @@
 <?php
 $data = [];
-$data["Title"] = "ONTEST DHT"; 
+$data["Title"] = " DHT ONTEST"; 
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -55,7 +55,7 @@ $data["Title"] = "ONTEST DHT";
                 <div>
                     <a class="fw-bold text-white text-decoration-none" href="home" style="transition: all 0.3s ease;">
                         <i class="fa fa-fire me-2"></i>
-                        <span class="fs-4">ONTEST <strong class="text-warning">DHT</strong></span>
+                        <span class="fs-4"> DHT<strong class="text-warning">ONTEST</strong></span>
                     </a>
                 </div>
                 <div>
@@ -90,7 +90,7 @@ $data["Title"] = "ONTEST DHT";
             <!-- Hero Section -->
             <div class="bg-light text-center py-6 position-relative" style="background: linear-gradient(135deg, #f0f4f8 0%, #e0e7f7 100%);">
                 <div class="container py-5">
-                    <h1 class="fw-bold fs-1 mb-4 text-dark">ONTEST DHT - Hệ thống tạo và quản lý bài thi cá nhân hóa</h1>
+                    <h1 class="fw-bold fs-1 mb-4 text-dark">DHT ONTEST - Hệ thống tạo và quản lý bài thi cá nhân hóa</h1>
                     <p class="lead text-muted mb-5">Hỗ trợ tạo và quản lý ngân hàng câu hỏi, đề thi trắc nghiệm, bài giảng, tổ chức thi online và giao bài tập trên mọi nền tảng.</p>
                     <a class="btn btn-primary btn-lg m-2 btn-custom" href="auth/signin">Tham gia ngay</a>
                     <a class="btn btn-outline-primary btn-lg m-2 btn-custom" href="#section--1">Tìm hiểu thêm</a>
@@ -102,7 +102,7 @@ $data["Title"] = "ONTEST DHT";
             <div id="section--1" class="py-6 bg-white">
                 <div class="container">
                     <div class="text-center mb-5">
-                        <h2 class="fw-bold fs-3">Tại sao chọn ONTEST DHT?</h2>
+                        <h2 class="fw-bold fs-3">Tại sao chọn DHT ONTEST?</h2>
                         <p class="text-muted fs-5">Hệ thống thi cá nhân hóa – thông minh – bảo mật</p>
                     </div>
                     <div class="row g-4">
@@ -121,7 +121,7 @@ $data["Title"] = "ONTEST DHT";
                                     <i class="fa fa-code fa-2x"></i>
                                 </div>
                                 <h5 class="fw-semibold">Tạo đề thi tự động</h5>
-                                <p class="text-muted">ONTEST DHT hỗ trợ giáo viên sinh đề nhanh chóng, đa dạng và bám sát mục tiêu học tập.</p>
+                                <p class="text-muted"> DHT ONTEST hỗ trợ giáo viên sinh đề nhanh chóng, đa dạng và bám sát mục tiêu học tập.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -205,7 +205,7 @@ $data["Title"] = "ONTEST DHT";
                 </div>
                 <hr class="bg-light">
                 <div class="text-center pt-3">
-                    <small class="text-muted">© <?php echo date('Y'); ?> ONTEST DHT. All rights reserved.</small>
+                    <small class="text-muted">© <?php echo date('Y'); ?> DHT ONTEST. All rights reserved.</small>
                 </div>
             </div>
         </footer>

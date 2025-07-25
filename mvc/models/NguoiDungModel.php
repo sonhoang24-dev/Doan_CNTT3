@@ -102,23 +102,25 @@ class NguoiDungModel extends DB
         return $result ? mysqli_fetch_assoc($result) : false;
     }
 
-    public function checkOpt($email, $otp)
-    {
-        $email = mysqli_real_escape_string($this->con, $email);
-        $otp = mysqli_real_escape_string($this->con, $otp);
-        $sql = "SELECT * FROM `nguoidung` WHERE `email`='$email' AND `otp`='$otp'";
-        $result = mysqli_query($this->con, $sql);
-        return $result && mysqli_num_rows($result) > 0;
-    }
+public function checkOtp($email, $otp)
+{
+    $stmt = $this->con->prepare("SELECT 1 FROM nguoidung WHERE email = ? AND otp = ?");
+    $stmt->bind_param("ss", $email, $otp);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    return $stmt->num_rows > 0;
+}
 
-    public function changePassword($id, $new_password)
-    {
-        $id = mysqli_real_escape_string($this->con, $id);
-        $new_password = password_hash($new_password, PASSWORD_DEFAULT);
-        $sql = "UPDATE `nguoidung` SET `matkhau`='$new_password' WHERE `id`='$id'";
-        $result = mysqli_query($this->con, $sql);
-        return $result !== false;
-    }
+
+public function changePassword($email, $new_password_hashed)
+{
+    $email = mysqli_real_escape_string($this->con, $email);
+    $sql = "UPDATE `nguoidung` SET `matkhau` = '$new_password_hashed' WHERE `email` = '$email'";
+    $result = mysqli_query($this->con, $sql);
+    return $result !== false;
+}
+
 
     public function checkPassword($id, $password)
     {

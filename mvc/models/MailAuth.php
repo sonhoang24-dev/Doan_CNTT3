@@ -7,8 +7,6 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/phpmailer/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-require 'vendor/phpmailer/phpmailer/src/OAuth.php';
-require 'vendor/phpmailer/phpmailer/src/POP3.php';
 
 class MailAuth extends DB
 {
@@ -18,45 +16,53 @@ class MailAuth extends DB
     {
         parent::__construct();
         $this->mail = new PHPMailer(true);
-        $this->mail->SMTPDebug = SMTP::DEBUG_SERVER; // Enable verbose debug output
-        $this->mail->isSMTP(); // gửi mail SMTP
-        $this->mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
-        $this->mail->SMTPAuth = true; // Enable SMTP authentication
-        $this->mail->Username = 'tsinh11111@gmail.com'; // SMTP username
-        $this->mail->Password = 'ojldjxeqzmdxznbh'; // SMTP password
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-        $this->mail->Port = 587; // TCP port to connect to
-        $this->mail->setFrom('tsinh579@gmail.com', 'SGU TEST');
+
+        $this->mail->CharSet = 'UTF-8';
+        $this->mail->SMTPDebug = SMTP::DEBUG_OFF; 
+        $this->mail->isSMTP();
+        $this->mail->Host = 'smtp.gmail.com';
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = 'ontestdht@gmail.com';
+        $this->mail->Password = str_replace(' ', '', 'peuhdht ehtcoodlp');
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mail->Port = 587;
+        $this->mail->setFrom('ontestdht@gmail.com', 'DHT OnTest');
     }
 
-    public function sendOpt($email,$opt)
+    public function sendOpt($email, $opt)
     {
         try {
-            $this->mail->addAddress($email); // Name is optional
-            $this->mail->isHTML(true);   // Set email format to HTML
-            $this->mail->Subject = 'Code OPT';
-            $this->mail->Body = '<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-                <div style="margin:50px auto;width:70%;padding:20px 0">
-                <div style="border-bottom:1px solid #eee">
-                    <a href="#" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">SGU TEST</a>
+            $this->mail->addAddress($email);
+            $this->mail->isHTML(true);
+
+            $this->mail->Subject = mb_encode_mimeheader('Mã xác thực OTP của bạn', 'UTF-8');
+
+            $this->mail->Body = '
+                <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h2 style="color: #115e59; margin: 0;">DHT OnTest</h2>
+                        <p style="color: #555; font-size: 14px; margin-top: 4px;">Xác thực tài khoản</p>
+                    </div>
+                    <p style="font-size: 15px; color: #333;">Xin chào,</p>
+                    <p style="font-size: 15px; color: #333;">Bạn vừa yêu cầu mã xác thực OTP. Vui lòng sử dụng mã bên dưới trong vòng <strong style="color: #b91c1c;">5 phút</strong> :</p>
+                    <div style="text-align: center; margin: 25px 0;">
+                        <span style="display: inline-block; background-color: #00466a; color: #fff; font-size: 24px; padding: 12px 24px; border-radius: 6px; letter-spacing: 4px;">' . $opt . '</span>
+                    </div>
+                    <p style="font-size: 14px; color: #555;">Nếu bạn không yêu cầu điều này, vui lòng bỏ qua email.</p>
+                    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;" />
+                    <div style="text-align: center; font-size: 12px; color: #999;">
+                        <p>OnTest DHT - Nền tảng thi trực tuyến</p>
+                        <p>Vui lòng không trả lời email này.</p>
+                    </div>
                 </div>
-                <p style="font-size:1.1em">Hi,</p>
-                <p>Thank you for choosing Your Brand. Use the following OTP to complete your Sign Up procedures. OTP is valid for 5 minutes</p>
-                <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">'.$opt.'</h2>
-                <p style="font-size:0.9em;">Regards,<br />SGU TEST</p>
-                <hr style="border:none;border-top:1px solid #eee" />
-                <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-                    <p>QA Inc</p>
-                    <p>Số 273 An Dương Vương, Phường 3, Quận 5, TP. HCM</p>
-                    <p>Việt Nam</p>
-                </div>
-                </div>
-                </div>';
-            $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            ';
+
+            $this->mail->AltBody = 'Mã OTP của bạn: ' . $opt;
+
             $this->mail->send();
             echo "Success send";
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
+            echo "Gửi email thất bại. Lỗi: {$this->mail->ErrorInfo}";
         }
     }
 }
